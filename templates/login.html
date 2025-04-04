@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+
+    <head>
+        <title>Financer Login</title>
+    </head>
+
+    <body>
+        <form method="post" action="/" encrypte="multipart/form-data">
+            {{form.hidden_tag()}}
+            <p>{{  form.username.label }} {{form.username()}}</p>
+            <p>{{  form.password.label }} {{form.password()}}</p>
+            <p>{{ form.submit() }}</p>
+            <a href="{{ url_for('register') }}">Dont have an account? Register</a>
+            
+            
+            {% with messages = get_flashed_messages(with_categories=True) %}
+             {% if messages %}
+                {% for category, message in messages %}
+               <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+             {% endif %}
+        
+            {% endwith %}
+
+            
+        </form>
+    </body>
+
+
+</html>
