@@ -1,12 +1,10 @@
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField
-from wtforms.validators import InputRequired,Length, EqualTo
 from flask import Flask, render_template, request, redirect, url_for, flash
-from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 import mysql.connector
 from werkzeug.security import check_password_hash, generate_password_hash
 from dotenv import load_dotenv
 import os
+from source import User, LoginForm, RegisterForm
 
 load_dotenv()
 
@@ -21,36 +19,13 @@ login_manager.login_view = 'login'
 #database connection
 def db_connect():
     return mysql.connector.connect(
-    host = 'localhost',
-    #host = os.getenv('DB_HOST'),
+    host = 'localhost',                     #for development
+    #host = os.getenv('DB_HOST'),           #for production
     port = os.getenv('DB_PORT'),
     user = os.getenv('DB_USER'),
     password = os.getenv('DB_PASSWORD'),
     database = os.getenv('DB_NAME')
     )
-
-#user class flask login
-class User(UserMixin):
-    def __init__(self,id,username,password):
-        self.id=id
-        self.username=username
-        self.password=password
-
-
-#login form
-
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired()])
-    password = PasswordField('Password', validators=[InputRequired()])
-    submit=SubmitField('Log In')
-#register form
-
-class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(),Length(min=5,max=10)])
-    password = PasswordField('Password', validators=[InputRequired(), Length(min=6)])
-    confirm_password=PasswordField('Repeat Password', validators=[InputRequired(), EqualTo('password', message='passwords must be the same')])
-    email = EmailField('E-mail', validators=[InputRequired()])
-    submit=SubmitField('Register')
 
 @login_manager.user_loader
 def userload(user_id):

@@ -4,26 +4,37 @@
 
     <head>
         <title>Financer Register</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="{{ url_for('static', filename='preaccess.css') }}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
     </head>
 
     <body>
-        <form method="post">
-            {{form.hidden_tag()}}
-            <p>{{  form.username.label }} {{form.username()}}</p>
-            <p>{{  form.password.label }} {{form.password()}}</p>
-            <p>{{  form.confirm_password.label }} {{form.confirm_password()}}</p>
-            <p>{{  form.email.label }} {{form.email()}}</p>
-            <p>{{ form.submit() }}</p>
+        <div id="center">
+            <div id="logo">💸</div>
+            <h1>Financer</h1>
+            <form method="post">
+                {{form.hidden_tag()}}
+                <p>{{form.username(placeholder="Username")}}</p>
+                <p>{{form.password(placeholder="Password")}}</p>
+                <p>{{form.confirm_password(placeholder="Confirm password")}}</p>
+                <p>{{form.email(placeholder="E-mail")}}</p>
+                <p>{{ form.submit() }}</p>
             
+                <a href="{{ url_for('login') }}">Already have an account? Log In</a>
+                
+                
+                {% with messages = get_flashed_messages(with_categories=True) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
             
-            {% with messages = get_flashed_messages(with_categories=True) %}
-             {% if messages %}
-                {% for category, message in messages %}
-               <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-             {% endif %}
-        
-            {% endwith %}
+                {% endwith %}
+            </div>
 
 
         </form>

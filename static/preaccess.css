@@ -1,0 +1,72 @@
+body
+{
+    padding: 0;
+    margin: 0;
+    /*background-color: rgba(234, 247, 226, 1);
+    background-image: linear-gradient(135deg, rgba(234, 247, 226, 1) 0%, rgba(103, 118, 157, 1) 100%);*/
+    background-color: rgba(247, 242, 226, 1);
+    background-image: linear-gradient(135deg, rgb(247, 229, 226) 0%, rgba(103, 118, 157, 1) 100%);
+    /*background-color: rgba(148, 163, 170, 1);
+    background-image: linear-gradient(360deg, rgba(148, 163, 170, 1) 0%, rgba(198, 181, 155, 1) 100%);*/
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    display: grid;
+    grid-template-columns: 1fr,1fr,1fr;
+    grid-template-rows: 1fr,1fr,1fr;
+    justify-items: center;
+    text-align: center;
+}
+
+#center
+{
+    justify-self: center;
+    border-radius: 40px;
+    background-color: rgba(0, 0, 0, 0.134);
+    margin:5em;
+    padding: 2em;
+    -webkit-box-shadow: 8px 8px 24px -19px rgba(66, 68, 90, 1);
+    -moz-box-shadow: 8px 8px 24px -19px rgba(66, 68, 90, 1);
+    box-shadow: 8px 8px 24px -19px rgba(66, 68, 90, 1);
+    opacity: 0;
+    transform: translateY(80px);  /* lekko z dołu */
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+a
+{
+text-decoration: none;
+color: black;
+}
+
+#logo
+{
+    font-size: 4em;
+}
+.varela-round-regular {
+    font-family: "Varela Round", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+input{
+    border: 1px, rgb(92, 91, 91), solid;
+    border-radius: 40px;
+    width: 20em;
+    height: 2em;
+    background-color: rgba(216, 216, 216, 0.585);
+    transition: 0.5s;
+}
+
+input:hover
+{
+    background-color: rgba(56, 101, 206, 0.18);
+    transition: 0.5s;
+}
