@@ -68,19 +68,39 @@ def register():
     if form.validate_on_submit():
         password=form.password.data
         hashed_password=generate_password_hash(password)
+        
         try:
-            conn=db_connect()
-            cursor=conn.cursor(dictionary=True)
-            cursor.execute("INSERT INTO users (username, password_hash, email) VALUES (%s, %s, %s)", (form.username.data, hashed_password, form.email.data,))
-            print(form.username.data, hashed_password, form.email.data)
+            conn = db_connect()
+            cursor = conn.cursor(dictionary=True)
+            
+            cursor.execute("SELECT * FROM users WHERE username = %s", (form.username.data,))
+            existing_user = cursor.fetchone()
+            
+            if existing_user:
+                flash('Username already exists, please choose another one', 'error')
+                return redirect(url_for('register'))
+            
+            cursor.execute("SELECT * FROM users WHERE email = %s", (form.email.data,))
+            existing_email = cursor.fetchone()
+            
+            if existing_email:
+                flash('Email is already registered', 'error')
+                return redirect(url_for('register'))
+            
+            cursor.execute("INSERT INTO users (username, password_hash, email) VALUES (%s, %s, %s)", (form.username.data, hashed_password, form.email.data))
             conn.commit()
-            flash('Register succeded','success')
+            
+            flash('Registration successful', 'success')
             return redirect(url_for('login'))
+
         except Exception as e:
-            flash(str(e), 'danger')
+            print(str(e))
+            flash('An error occurred during registration. Please try again.', 'error')
+
         finally:
             cursor.close()
             conn.close()
+
 
     return render_template('register.html', form=form)
 
