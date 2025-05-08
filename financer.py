@@ -109,5 +109,20 @@ def register():
 def dashboard():
     return render_template('dashboard.html')
 
+@app.route('/account', methods=['GET'])
+@login_required
+def account():
+    return render_template('account.html')
+
+@app.route('/settings', methods=['GET'])
+@login_required
+def settings():
+    return render_template('settings.html')
+
+@app.route('/contact', methods=['GET'])
+@login_required
+def contact():
+    return render_template('contact.html')
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5050, debug=True)

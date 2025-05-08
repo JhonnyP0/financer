@@ -2,11 +2,36 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+        <title>Financer</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+        <script src="https://kit.fontawesome.com/76a2f4bd6e.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
-        <h1>dashboard</h1>
+        
+
+<div id="mySidebar" class="sidebar">
+    <div id="logo"></div>
+    <a href="{{url_for('account')}}">Account</a>
+    <a href="{{url_for('settings')}}">Settings</a>
+    <a href="{{url_for('contact')}}">Contact</a>
+</div>
+
+<script>
+    function toggleMenu() {
+        const sidebar = document.getElementById("mySidebar");
+        sidebar.classList.toggle("active");
+    }
+</script>
+        <div id="main">
+            <button class="open-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+            <div id="contentblock">
+            {%block content%}
+            
+            {% endblock %}
+            </div>
+
+        </div>
         
     </body>
 </html>
