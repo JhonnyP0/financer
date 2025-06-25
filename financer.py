@@ -98,8 +98,15 @@ def register():
             flash('An error occurred during registration. Please try again.', 'error')
 
         finally:
-            cursor.close()
-            conn.close()
+            try:
+                cursor.close()
+            except:
+                pass
+            try:
+                conn.close()
+            except:
+                pass
+
 
 
     return render_template('register.html', form=form)
