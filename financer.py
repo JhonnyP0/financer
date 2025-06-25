@@ -124,5 +124,11 @@ def settings():
 def contact():
     return render_template('contact.html')
 
+@app.route('/logout', methods=['GET'])
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('login'))
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5050, debug=True)
