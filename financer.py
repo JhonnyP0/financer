@@ -9,7 +9,7 @@ from source import User, LoginForm, RegisterForm
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SECRET_KEY']= os.getenv('API_KEY')
+app.secret_key = os.getenv('API_KEY')
 
 #flask login config
 login_manager = LoginManager()
