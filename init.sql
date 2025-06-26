@@ -7,9 +7,9 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS accounts (
     acc_id INT AUTO_INCREMENT PRIMARY KEY,
-    usr_id INT,
+    id INT,
     spendings INT,
     savings INT,
     groceries INT,
-    FOREIGN KEY (usr_id) references users(usr_id)
+    FOREIGN KEY (id) references users(id)
 );
